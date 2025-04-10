@@ -38,6 +38,6 @@ This mini-project demonstrates a **Disk-First Logging Architecture** where:
 1. Clone the repo:
    ```bash
    git clone https://github.com/HRS05/DiskFirstLogging-WAL-.git
-   cd DiskFirstLogging
+   
 
 
