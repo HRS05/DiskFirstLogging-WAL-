@@ -1,19 +1,22 @@
 package org.hrs;
 
+import org.hrs.producer.Producer;
+import org.hrs.consumer.Consumer;
 import org.hrs.logger.DiskLogger;
-import org.hrs.process.LogProcessor;
 
 public class Main {
-    public static void main(String[] args) {
-        System.out.println("Hello world!");
-        DiskLogger.log("User login: harsh123");
-        DiskLogger.log("User clicked: /home");
-        DiskLogger.log("User login: harsh123");
+    public static void main(String[] args) throws InterruptedException {
+        System.out.println("Queue system started...");
 
+        Producer producer = new Producer();
+        Consumer consumer = new Consumer(DiskLogger.getLogDir());
 
-        String logFile = DiskLogger.getLogFilePath();
+        consumer.start();
 
-        Thread processorThread = new Thread(new LogProcessor(logFile));
-        processorThread.start();
+        // Simulate producer sending messages
+        for (long i = 0; i < 100000000; i++) {
+            producer.send("Event #" + i);
+            Thread.sleep(100); // simulate delay
+        }
     }
 }

@@ -1,43 +1,25 @@
-# 🚀 Disk-First Logging in Java
+# Disk-Based Queue System (Kafka-Style)
 
-> **Java + Disk-First Logging = Bulletproof Observability**
-
-## 🧠 Overview
-
-In performance-critical applications, logging to memory or remote systems can introduce latency or risk log loss on crashes.  
-This mini-project demonstrates a **Disk-First Logging Architecture** where:
-
-- Logs are **written to disk first** for durability.
-- A **background thread** reads logs from the file and sends them to a **mock external system** (stdout).
+This project is a lightweight, disk-backed message queue system implemented in Java. It simulates key features of systems like Apache Kafka by using **write-ahead log (WAL)** files for durability, file rotation for scalability, and a simple **producer-consumer** model.
 
 ---
 
-## ⚙️ Features
+## 📁 Project Structure
 
-✅ Durable disk-based logging  
-✅ Async log processing  
-✅ Crash-safe architecture  
-✅ Ideal for microservices and distributed systems
-
----
-
+└── Main.java  
+├── logger/  │ └── DiskLogger.java  
+├── process/ │ └── LogProcessor.java  
+├── queue/ │ ├── QueueProducer.java   
+             └── QueueConsumer.java   
 
 ---
 
-## 🧪 How It Works
+## 🔧 Features
 
-1. The `DiskLogger` class writes log entries to a file (`logs/app.log`).
-2. `LogProcessor` runs in a background thread and reads entries line-by-line.
-3. Each log is "processed" by printing it to the console (simulating external sync).
-4. This keeps your app responsive and logs durable.
-
----
-
-## 🛠️ How to Run
-
-1. Clone the repo:
-   ```bash
-   git clone https://github.com/HRS05/DiskFirstLogging-WAL-.git
-   
+- ✅ **Write-Ahead Logging**: All messages are immediately written to disk.
+- ✅ **Log File Rotation**: Automatically rotates log files after 1 MB.
+- ✅ **Producer/Consumer Decoupling**: Safe concurrent writing/reading.
+- ✅ **Offset Management**: Keeps track of where the consumer left off.
+- 🚀 **Pluggable System**: Easily extend to add acknowledgments, topics, partitions, etc.
 
 
